@@ -23,4 +23,4 @@ let ``GetId`` (input, expectedId) =
 
 [<Fact>]
 let ``big input`` () =
-    bigSet.Split '\n' |> Array.map getId |> Array.max |> should equal 42
+    bigSet.Split '\n' |> Array.map getId |> Array.max |> should equal 892
