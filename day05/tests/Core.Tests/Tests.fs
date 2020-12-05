@@ -24,3 +24,12 @@ let ``GetId`` (input, expectedId) =
 [<Fact>]
 let ``big input`` () =
     bigSet.Split '\n' |> Array.map getId |> Array.max |> should equal 892
+
+[<Fact>]
+let ``find seats big input`` () =
+    let ids = bigSet.Split '\n' |> Array.map getId |> Array.toSeq
+    let rest = generateAllIds |> List.except ids
+    rest |> List.contains 625 |> should equal true
+    
+
+

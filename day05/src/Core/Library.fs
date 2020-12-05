@@ -26,6 +26,13 @@ module Plane =
         let col = board |> Seq.skip 7 |> List.ofSeq |> computeCol
         (row, col)
 
-    let getId (board: string) =
-        let (row, col) = getRowCol board
+    let calcId (row, col) =
         row * 8 + col
+
+    let getId (board: string) =
+        getRowCol board |> calcId
+
+    let generateAllIds =
+        let rows = seq {1..126}
+        let cols = seq {0..7}
+        cols |> Seq.allPairs rows |> Seq.map calcId |> List.ofSeq
