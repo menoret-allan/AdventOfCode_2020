@@ -27,7 +27,7 @@ let ``Check valid`` () =
 
 [<Fact>]
 let ``Check all`` () =
-    bigScan |> translateScan |> checkPassports |> List.length |> should equal 4
+    bigScan |> translateScan |> checkPassports |> List.length |> should equal 194
 
 
 
