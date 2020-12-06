@@ -11,9 +11,23 @@ module ScanParse =
         else
             None
 
+    let (|Sizing|_|) (p:string) (s:string) =
+        if s.EndsWith(p) then
+            let rest = s.Substring(0, s.Length - p.Length)
+            match run pint32 rest with
+            | Success(height, _, _) -> Some (height)
+            | _ -> None
+        else
+            None
+
     let manyDigit = many digit
+    let manyHex = many hex
 
     let parseManyDigit (s:string) = run manyDigit s |> function
+        | Success(result, _, _)   -> Some result
+        | _ -> None
+
+    let parseManyHex (s:string) = run manyHex s |> function
         | Success(result, _, _)   -> Some result
         | _ -> None
 
@@ -45,6 +59,24 @@ module ScanParse =
         | Success(year, _, _) when year >= 1920 && year <= 2002  -> Some (Byr year)
         | _ -> None
 
+    let createHclFromDigit s =
+        match parseManyHex s with
+        | Some result when List.length result = 6 -> Some (Hcl s)
+        | _ -> None
+
+    let createHcl s =
+        match s with
+        | Prefix "#" rest -> createHclFromDigit rest
+        | _ -> None
+
+    let createCid s = Some (Cid s)
+
+    let createHgt s =
+        match s with
+        | Sizing "cm" h when h >= 150 &&  h <= 193 -> Some (Hgt (Cm h))
+        | Sizing "in" h when h >= 59 &&  h <= 76 -> Some (Hgt (In h))
+        | _ -> None
+
     let toField str =
         match str with
         | Prefix "ecl:" rest -> createEcl rest
@@ -61,9 +93,9 @@ module ScanParse =
         let oneLine = scan.Split '\n' |> List.ofArray |> List.reduce (fun acc x -> acc + " " + x)
         oneLine.Split "  " |> List.ofArray
 
+
     let translatePassword (pass: string) =
-        pass.Split ' ' |> List.ofArray |> List.map toField 
-        //|> List.where (<> None)
+        pass.Split ' ' |> List.ofArray |> List.map toField |> List.filter ((<>) None) |> List.map (fun x -> match x with | Some v -> v | None -> failwith "Not possible should have been filtered")
 
     let translateScan (scan: string) =
         scan |> splitPassword |> List.map translatePassword

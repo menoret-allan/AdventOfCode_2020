@@ -17,10 +17,17 @@ let ``Parser group small input into 4 groups`` () =
 
 
 
+[<Fact>]
+let ``Check invalid`` () =
+    smallInvalidScan |> translateScan |> checkPassports |> List.length |> should equal 0
 
 [<Fact>]
-let ``Parser password`` () =
-    "ecl:gry pid:860033327 eyr:2020 hcl:#fffffd byr:1937 iyr:2017 cid:147 hgt:183cm" |>
-        translatePassword |> should equal [
-            Ecl.Gry
-        ]
+let ``Check valid`` () =
+    smallValidScan |> translateScan |> checkPassports |> List.length |> should equal 4
+
+[<Fact>]
+let ``Check all`` () =
+    bigScan |> translateScan |> checkPassports |> List.length |> should equal 4
+
+
+
