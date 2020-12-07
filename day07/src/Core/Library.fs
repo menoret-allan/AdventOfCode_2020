@@ -1,7 +1,6 @@
 ﻿namespace Core
 
 module Bags =
-
     type Bag = string
 
     type Bagception = {Main:Bag;Ception:Bag list}
@@ -27,3 +26,13 @@ module Bags =
     let calc (target:string) (bags:Bagception list) =
         let firstTargets = bags |> getMatchBags [target]
         calc2 firstTargets bags
+
+
+module BagsPart2 =
+    type Bag = string
+    type Bagception = {Main:Bag;Ception:(Bag*int) list}
+
+    let rec calc (target:Bag) (bags:Bagception list) =
+        let {Ception=ception} = bags |> List.find (fun {Main=main} -> main = target)
+        ception |> List.sumBy (fun (b,c) -> c + c * calc b bags)
+
