@@ -25,7 +25,5 @@ module Bags =
         | false -> (List.length targets) + calc2 (getMatchBags targets cleaned) cleaned 
 
     let calc (target:string) (bags:Bagception list) =
-        let test = bags |> getMatchBags [target]
-        test |> List.iter (printf "%s / ")
-        let y = calc2 test bags
-        y
+        let firstTargets = bags |> getMatchBags [target]
+        calc2 firstTargets bags
