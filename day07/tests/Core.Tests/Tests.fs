@@ -52,4 +52,4 @@ let ``My small test2`` () =
 
 [<Fact>]
 let ``My big test`` () =
-    bigSet |> scan |> calc "shiny gold" |> should equal 42
+    bigSet |> scan |> calc "shiny gold" |> should equal 378
