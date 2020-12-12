@@ -17,4 +17,4 @@ let ``small set 2 part 01`` () =
 
 [<Fact>]
 let ``big set part 01`` () =
-    bigSet |> scan |> computeManhattanDistance |> should equal 25
+    bigSet |> scan |> computeManhattanDistance |> should equal 415
