@@ -39,15 +39,12 @@ module Boat =
     let handle180 (wayPoint:Pos) = {X= -wayPoint.X;Y= -wayPoint.Y}
     let handle270 (wayPoint:Pos) = {X= wayPoint.Y;Y= -wayPoint.X}
 
-        // 2 1 -> 
-
     let turnClockWise (wayPoint:Pos) a =
         match a with
         | 90 -> handle270 wayPoint
         | 180 -> handle180 wayPoint
         | 270 -> handle90 wayPoint
         | _ -> failwith "unvalid angle"
-        // {X=wayPoint.Y*(int (sin a)) + wayPoint.X*(int (cos a)); Y=wayPoint.Y*(int (cos a)) - wayPoint.X * (int (sin a))}
 
     let turnCounterClockWise (wayPoint:Pos) a =
         match a with
@@ -55,9 +52,6 @@ module Boat =
         | 180 -> handle180 wayPoint
         | 270 -> handle270 wayPoint
         | _ -> failwith "unvalid angle"
-      
-        // {X=wayPoint.Y*(int (sin a)) + wayPoint.X*(int (cos a)); Y=wayPoint.Y*(int (cos a)) - wayPoint.X * (int (sin a))}
-
 
     let nextStep2 ((pos:Pos), (wayPoint:Pos)) command =
         match command with
