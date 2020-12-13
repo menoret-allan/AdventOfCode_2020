@@ -41,14 +41,12 @@ module SeatingSystem =
         let res = seatMap.Mapping |> Map.toSeq |> Seq.map (computeNewState seatMap.Mapping seatMap.Limits)
         { seatMap with Mapping = Mapping res}
 
-
     let countOccupiedSeats mapping =
         let res = mapping |> Map.toSeq |> Seq.filter (snd >> ((=) Occupied))
         Seq.length res
 
     let mapAreSame (map1: SeatMap) (map2: SeatMap)  =
         map1 = map2
-        // map1.Mapping |> Map.toSeq |> Seq.exists (fun (pos, v) -> map2.Mapping.[pos] <> v) |> not
 
     let compute (sitsMap: SeatMap) =
         let rec compute oldMap newMap =
