@@ -1,8 +1,18 @@
 module Tests
 
-open System
+open FsUnit
 open Xunit
 
+open Core.ShuttleSearch
+open Inputs
+
+
 [<Fact>]
-let ``My test`` () =
-    Assert.True(true)
+let ``small set part 1`` () =
+    smallSet |> search |> should equal 295
+
+[<Fact>]
+let ``big set part 1`` () =
+    bigSet |> search |> should equal 1835
+
+
