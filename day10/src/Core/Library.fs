@@ -17,9 +17,8 @@ module AdapterArray =
             let (v2,r) = generateAll ((x)::rest)
             (v+v2,r)
         | 3::x::rest ->
-            let (v,_) = generateAll ((x+2)::rest)
             let (v2,r) = generateAll ((x)::rest)
-            (v+v2,r)
+            (1I+v2,r)
         | x::rest -> (bigint(1), rest)
 
     let rec generateAll2 x =
