@@ -1,5 +1,35 @@
 module Inputs
 
+    let extraSmallSet = """16
+10
+15
+5
+1
+11
+7
+19
+6
+12
+4"""
+
+    let superSmallSet = """1
+2
+3
+4"""
+    let superSmallSet2 = """1
+2
+4
+5"""
+    let superSmallSet3 = """1
+2
+4"""
+    let superSmallSet4 = """2
+4
+5"""
+    let superSmallSet5 = """4
+5
+6"""
+
     let smallSet = """28
 33
 18

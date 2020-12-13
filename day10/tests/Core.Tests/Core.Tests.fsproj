@@ -9,7 +9,6 @@
   <ItemGroup>
     <Compile Include="Inputs.fs" />
     <Compile Include="Tests.fs" />
-    <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FsUnit" Version="4.0.2" />
